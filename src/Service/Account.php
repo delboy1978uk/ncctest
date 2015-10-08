@@ -24,9 +24,9 @@ class Account
         $a = new AccountEntity();
 
         $a->setId($array['attr']['id'])
-            ->setName($array['children'][0]['name']);
+            ->setName($array['children'][0]['children'][0]);
 
-        $monitors = $array['children'][1];
+        $monitors = $array['children'][1]['children'];
 
         foreach ($monitors as $mon) {
 
