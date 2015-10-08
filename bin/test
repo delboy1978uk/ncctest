@@ -1,0 +1,49 @@
+#!/usr/bin/env php
+<?php
+    if(count($argv) == 1)
+        {
+        echo "\n\nncc\n";
+        echo "======================================\n\n";
+        echo "Usage: ./ncc command\n\n";
+        echo " \n";
+        exit;
+    }
+
+    require_once('../vendor/autoload.php');
+
+    echo "\n";
+
+
+    try {
+        $d = new DOMDocument();
+
+        $account = $d->createElement('account');
+        $account->setAttribute('id',123456);
+
+        $name = $d->createElement('name','BBC');
+        $account->appendChild($name);
+
+        $monitors = $d->createElement('monitors');
+
+        $mon = $d->createElement('monitor');
+        $mon->setAttribute('id',5235632);
+        $url = $d->createElement('url','http://www.bbc.co.uk');
+        $mon->appendChild($url);
+
+        $mon2 = $d->createElement('monitor');
+        $mon2->setAttribute('id',5235633);
+        $url2 = $d->createElement('url','http://www.bbc.co.uk/news');
+        $mon2->appendChild($url2);
+
+        $monitors->appendChild($mon);
+        $monitors->appendChild($mon2);
+
+        $account->appendChild($monitors);
+
+        $d->appendChild($account);
+        echo $d->saveXML();
+    }
+    catch(Exception $e){
+        echo "There was a problem. \n".$e->getMessage()."\n\n";
+    }
+    echo "\n";

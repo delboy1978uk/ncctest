@@ -1,0 +1,22 @@
+{
+    "name": "delboy1978uk/ncctest",
+    "description": "Test for NCC",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Derek McLean",
+            "email": "delboy1978uk@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-uri": "2.5.1"
+    },
+    "require-dev":{
+        "codeception/codeception":"dev-master"
+    },
+    "autoload":{
+        "psr-4":{
+            "Del\\":"src/"
+        }
+    }
+}
