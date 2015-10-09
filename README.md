@@ -44,5 +44,5 @@ $monitor = new Monitor();
 $monitor->setId(123654);
 $monitor->setUrl(new Url('http://www.mtv.com/'));
 
-$acc->getMonoitors()->append($monitor);
+$acc->getMonitors()->append($monitor);
 ```
