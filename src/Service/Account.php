@@ -77,7 +77,7 @@ class Account
         $account->appendChild($monitors);
 
         $d->appendChild($account);
-        return $d->saveXML();
+        return $d->saveXML($account);
     }
 
 

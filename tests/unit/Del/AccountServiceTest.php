@@ -39,17 +39,27 @@ class AccountServiceTest extends \Codeception\TestCase\Test
         $this->assertEquals(2,$account->getMonitors()->count());
         $this->assertEquals(2,$monitors->count());
         $this->assertEquals(5235632,$monitors->current()->getId());
-        $this->assertEquals('http://bbc.co.uk/',$monitors->current()->getUrl()->toString());
+        $this->assertEquals('http://www.bbc.co.uk/',$monitors->current()->getUrl()->toString());
         $monitors->next();
         $this->assertEquals(5235633,$monitors->current()->getId());
-        $this->assertEquals('http://bbc.co.uk/news/',$monitors->current()->getUrl()->toString());
+        $this->assertEquals('http://www.bbc.co.uk/news',$monitors->current()->getUrl()->toString());
+    }
+
+
+    public function testConvertToXML()
+    {
+        $array = $this->getTestArray();
+        $account = $this->svc->createAccountFromArray($array);
+        $xml = $this->svc->convertAccountToXML($account);
+        $expected = $this->getTestXML();
+        $this->assertEquals($expected,$xml);
     }
 
 
     /**
      * @return array
      */
-    private function getTestarray()
+    private function getTestArray()
     {
         return [
             'name' => 'account',
@@ -75,7 +85,7 @@ class AccountServiceTest extends \Codeception\TestCase\Test
                                 [
                                     'name' => 'url',
                                     'attr' => [],
-                                    'children' => ['http://bbc.co.uk/'],
+                                    'children' => ['http://www.bbc.co.uk/'],
                                 ]
                             ],
                         ],
@@ -88,7 +98,7 @@ class AccountServiceTest extends \Codeception\TestCase\Test
                                 [
                                     'name' => 'url',
                                     'attr' => [],
-                                    'children' => ['http://bbc.co.uk/news/'],
+                                    'children' => ['http://www.bbc.co.uk/news'],
                                 ]
                             ],
                         ],
@@ -98,4 +108,11 @@ class AccountServiceTest extends \Codeception\TestCase\Test
         ];
     }
 
+    /**
+     * @return string
+     */
+    private function getTestXML()
+    {
+        return '<account id="123456"><name>BBC</name><monitors><monitor id="5235632"><url>http://www.bbc.co.uk/</url></monitor><monitor id="5235633"><url>http://www.bbc.co.uk/news</url></monitor></monitors></account>';
+    }
 }
